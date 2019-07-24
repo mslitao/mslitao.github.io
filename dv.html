@@ -7,15 +7,109 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style> circle {fill: lightblue; stroke: black;} </style>
 
-    <title>Hello, world!</title>
+    <title>Data Visualization - taol4</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+          <div class="container d-flex justify-content-between">
+              <a href="/Home" class="navbar-brand d-flex align-items-center">
+                  <strong>Data Visualization</strong>
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse collapse" id="navbarHeader" >
+                  <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/About">About</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/Contact">Contact</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    <div class="container body-content">
+        <h2>Narrative Visualization</h2>
+        <hr>
+        Introduction
+        <div id = "chart_div1">
+            <svg width=300 height=300></svg>
+        </div>
+        Here's some story.
+        
+        <hr>
+        <footer>
+            <p>© 2019 - taol4</p>
+        </footer>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script>
+        var width = 200;
+        var height = 200;
+        var margin = 50;
+        
+        xdomain = [Math.log10(10),Math.log10(150)];
+        xrange = [0,200];
+        ydomain =  [Math.log10(10),Math.log10(150)];
+        yrange = [200,0];
+        
+        xs = d3.scaleLinear().domain(xdomain).range(xrange);
+        ys = d3.scaleLinear().domain(ydomain).range(yrange);
+        
+        formatValue = d3.format("~s");
+        var x = d3.scaleLog().domain([10,150]).range([0,width]);
+        var y = d3.scaleLog().domain([10,150]).range([height, 0]);
+        
+        
+        data = d3.csv("https://flunky.github.io/cars2017.csv")
+        .then(function(data){
+          d3.select("svg")
+           .attr("width", width + 2*margin)
+           .attr("height", height+ 2*margin)
+           .append("g")
+             .attr("transform", "translate("+margin+","+margin+")")
+           .selectAll()
+           .data(data)
+           .enter()
+           .append("circle")
+            .attr("cx", function(d) {return xs (Math.log10(d.AverageCityMPG));})
+            .attr("cy", function(d) {return ys(Math.log10(d.AverageHighwayMPG));})
+            .attr("r",  function(d) {return 2 + parseInt(d.EngineCylinders);});
+        
+          var yAxis = d3.axisLeft(y)
+                .tickSize(4)
+                .tickValues([10, 20, 50,100])
+                .tickFormat(function(d) { return formatValue(d)});
+        
+        d3.select("svg").append("g")
+         .attr("transform", "translate("+margin+","+margin+")")
+         .call(yAxis);
+        
+        var xAxis = d3.axisBottom(x)
+                .tickSize(4)
+                .tickValues([10, 20, 50,100])
+                .tickFormat(function(d) { return formatValue(d)});
+        
+        d3.select("svg")
+         .append("g")
+         .attr("transform", "translate("+margin+","+(height+margin)+")")
+         .call(xAxis);
+        });
+        
+        </script>
   </body>

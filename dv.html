@@ -40,8 +40,12 @@
         <hr>
         Introduction
         Here's some story.
+        <h3>Line Chart</h3>
         <div id ="chart_line">
           <canvas width="960" height="500"></canvas>
+        </div>
+        <h3>Bubble Chart</h3>
+        <div id = "chart_bubble">
         </div>
         <hr>
         <footer>
@@ -57,9 +61,14 @@
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="scripts/line-chart.js"></script>
+    <script src="scripts/bubble-chart.js"></script>
     
     <script>
-      var canvas = document.querySelector("canvas");
-      drawchart_line(canvas);
+      $(document).ready(function(){ 
+        var canvas = document.querySelector("canvas");
+        drawchart_line(canvas);
+
+        drawchart_bubble("#chart_bubble");
+      }) 
     </script>
   </body>

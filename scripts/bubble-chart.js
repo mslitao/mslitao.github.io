@@ -1,4 +1,5 @@
 function drawchart_bubble(chart_id ){
+    format = d3.format(",d")
     dataset = {
         "children": [{"Name":"Olives","Count":4319},
             {"Name":"Tea","Count":4159},
@@ -29,7 +30,8 @@ function drawchart_bubble(chart_id ){
       .append("svg")
       .attr("width", diameter)
       .attr("height", diameter)
-      .attr("class", "bubble");
+      .attr("class", "bubble")
+      .attr("text-anchor", "middle");
     console.log(svg)
     var color =  d3.scaleOrdinal(d3.schemeCategory10)
 
@@ -54,7 +56,7 @@ function drawchart_bubble(chart_id ){
 
     node.append("title")
         .text(function(d) {
-            return d.Name + ": " + d.Count;
+            return d.data.Name + ": " + d.data.Count;
         });
 
     node.append("circle")
@@ -64,6 +66,9 @@ function drawchart_bubble(chart_id ){
         .style("fill", function(d,i) {
             return color(i);
         });
+    node.append("clipPath")
+      .append("use")
+        .attr("xlink:href", "");
 
     node.append("text")
         .attr("dy", ".2em")
@@ -88,7 +93,7 @@ function drawchart_bubble(chart_id ){
             return d.r/5;
         })
         .attr("fill", "white");
-
+    
     d3.select(self.frameElement)
         .style("height", diameter + "px");
 

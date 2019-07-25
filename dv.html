@@ -10,11 +10,31 @@
     <style> circle {fill: lightblue; stroke: black;} </style>
 
     <title>Data Visualization - taol4</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="scripts/line-chart.js"></script>
+    <script src="scripts/bubble-chart.js"></script>
+    <style>
+      .parent-DOM-element {
+        border: 1px solid black;
+        display: inline-block;
+      }
+      .div-same-line {
+        display: inline-block;
+      }
+      body {
+        min-height: 75rem;
+        padding-top: 4.5rem;
+      }
+    </style>
   </head>
   <body>
-      <div class="navbar navbar-dark bg-dark box-shadow">
+      <nav class="navbar navbar-dark bg-dark fixed-top">
           <div class="container d-flex justify-content-between">
-              <a href="/Home" class="navbar-brand d-flex align-items-center">
+              <a href="#" class="navbar-brand d-flex align-items-center">
                   <strong>Data Visualization</strong>
               </a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +54,22 @@
                   </ul>
               </div>
           </div>
-      </div>
-    <div class="container body-content">
-        <h2>Narrative Visualization</h2>
+        </nav>
+
+    <div class="container">
+
+        <div class="flex">Date
+            </span><span class="ml1 nowrap" title="7/25/2019"><span class="light-gray"></span> July 25, 2019</span></span>
+        </div>
+        <div class="flex">Narrative Visualization
+        </div>
+        <div class="flex">By
+            <span class="mid-gray">
+          <a class="inline-flex items-center fw5 no-underline near-black hover-blue" href="https://www.linkedin.com/in/-tao-li">Tao Li</a>
+        </div>
+        <hr>
+
+        <h1>Storytelling using Narrative Visualization</h1>
         <hr>
         Introduction
         Here's some story.
@@ -55,13 +88,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="scripts/line-chart.js"></script>
-    <script src="scripts/bubble-chart.js"></script>
+    
     
     <script>
       $(document).ready(function(){ 

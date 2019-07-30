@@ -11,6 +11,12 @@
 
     <title>Data Visualization - taol4</title>
     <style>
+       .node circle {
+          fill: #fff;
+          stroke: steelblue;
+          stroke-width: 3px;
+        }
+      .node text { font: 12px sans-serif; }
       .parent-DOM-element {
         border: 1px solid black;
         display: inline-block;
@@ -77,7 +83,6 @@
         </nav>
 
     <div class="container">
-
         <div class="flex">Date
             <span class="ml1 nowrap" title="7/25/2019"><span class="light-gray"></span> July 25, 2019</span>
         </div>
@@ -95,19 +100,42 @@
 
         <h1>Storytelling using Narrative Visualization</h1>
         <hr>
-        Introduction
-        Here's some story.
-        1. Problem to solve
-        2. Analysis process
-        3. Data Visualization
-        4. How to use D3 charts. 
         <h3>Hierachical Bar Chart</h3>
-        <div id = "chart_hbar">
-        </div>
-        <h3>Bubble Chart</h3>
-        <div id = "chart_bubble">
+        <div id = "div_intro">
+          <div class="row container">
+            <div class="col ">
+                <div  class="card" id = "chart_tree_1">
+                    Hierachy 1
+                </div>
+            </div>
+            <div class="col">
+                <div  class="card" id = "chart_tree_2">
+                    Hierachy 2
+                </div>
+            </div>
+          </div>
+          
         </div>
         <hr>
+        <div class="dropdown dropdown-menu-right" style="position:relative;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select Hierachy Structure
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button">1</button>
+              <button class="dropdown-item" type="button">2</button>
+            </div>
+          </div>
+        <div class="alert alert-info" role="alert">
+            <p class="mb-0">Click a green bar to drill down, or click the background to go back up.</p>
+          </div>
+        <div id = "chart_hbar" class="card">
+            
+        </div>
+        <!--h3>Bubble Chart </h3>
+        <div id = "chart_bubble" class="card">
+        </div>
+        <hr>-->
         <footer>
             <p>© 2019 - taol4</p>
         </footer>
@@ -118,24 +146,28 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
     <script src="scripts/bubble-chart.js"></script>
     <script src="scripts/hierarchical-bar-chart.js"></script>
     <script src="scripts/hierachical-bar-chart-2.js"></script>
+    <script src="scripts/tree-chart.js"></script>
 
     <script>
       $(document).ready(function(){ 
         //var canvas = document.querySelector("canvas");
         //drawchart_line(canvas);
 
-        drawchart_bubble("#chart_bubble");
+        //drawchart_bubble("#chart_bubble");
 
-        drawchart_bar("#chart_hbar")
+        //drawchart_bar("#chart_hbar");
 
-        drawchart_hierarchical_bar("#chart_hbar")
+        drawchart_hierarchical_bar("#chart_hbar");
+
+        drawchart_tree("#chart_tree" );
       }) 
       
      

@@ -1,7 +1,7 @@
 function drawchart_bar(chart_id ){
     var width = 960;
     var height = 500;
-    margin = ({top: 30, right: 10, bottom: 30, left: 50})
+    margin = ({top: 30, right: 40, bottom: 30, left: 50})
 
     var svg = d3.select(chart_id).append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -14,9 +14,7 @@ function drawchart_bar(chart_id ){
     var y = d3.scaleBand().range([height, 0]);
     var g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    d3.json("data.json", function(d) {
-      return d;
-    }).then(function(data) {
+    d3.json("data.json", function(data) {
       data.sort(function(a, b) { return a.value - b.value; });
             
       x.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -35,7 +33,8 @@ function drawchart_bar(chart_id ){
         .data(data)
         .enter()
         ;
-        bars.append("rect")
+      
+      bars.append("rect")
         .attr("class", "bar")
         .attr("x", 0)
         .attr("height", y.bandwidth())
@@ -59,7 +58,7 @@ function drawchart_bar(chart_id ){
           //x position is 3 pixels to the right of the bar
           .attr("x", function (d) {
             if(x(d.value) >=width ){
-             return x(d.value) - 50;
+             return x(d.value) - 20;
             }
             else
               return x(d.value) -10;

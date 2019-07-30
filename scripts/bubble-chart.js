@@ -35,12 +35,6 @@ function drawchart_bubble(chart_id ){
     console.log(svg)
     var color =  d3.scaleOrdinal(d3.schemeCategory10)
 
-    console.log(color);
-    console.log(color(0));
-    console.log(color(1));
-    console.log(color(2));
-
-
     var bubble = d3.pack(dataset)
         .size([diameter, diameter])
         .padding(1.5);

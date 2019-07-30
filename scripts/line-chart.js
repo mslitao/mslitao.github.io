@@ -28,6 +28,8 @@ d3.tsv("data.tsv", function(d) {
   d.close = +d.close;
   return d;
 }).then(function(data) {
+  data.date = parseTime(data.date);
+  data.close = +data.close;
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain(d3.extent(data, function(d) { return d.close; }));
 

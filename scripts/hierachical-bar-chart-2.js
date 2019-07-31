@@ -42,7 +42,7 @@ function drawchart_hierarchical_bar(chart_id ){
     d3.json("Fortune-Global-2019.json", function(error, root) {
         if (error) throw error;
         root = d3.hierarchy(root)
-                .sum(d => d.size)
+                .avg(d => d.data.value)
                 .sort((a,b) => b.value - a.value);
         partition(root);
         console.log(root)
@@ -184,7 +184,9 @@ function drawchart_hierarchical_bar(chart_id ){
         // Transition entering rects to the new x-scale.
         // When the entering parent rect is done, make it visible!
         enterTransition.select("rect")
-            .attr("width", function(d) { return x(d.value); })
+            .attr("width", function(d) {
+                 return x(d.value);
+            })
             .on("end",function(p) { if (p === d) d3.select(this).style("fill-opacity", null); });
         // Transition exiting bars to the parent's position.
         var exitTransition = exit.selectAll("g").transition()
@@ -227,14 +229,24 @@ function drawchart_hierarchical_bar(chart_id ){
             .style("text-anchor", "end")
             .text(function(d) { return d.data.name; });
         bar.append("rect")
-            .attr("width", function(d) { return x(d.value); })
+            .attr("width", function(d) { 
+                return x(d.value); 
+            })
             .attr("height", barHeight)
             .on("mousemove", function(d){
+                var info = (d.data.name)
+                if(level == 1 || level == 2){
+                    info = info  + ": <br>" + (d.data.CompanyCount) + " Companies"
+                }
+                else
+                {
+                    info = "Company:" + info  + "<br> Global Ranking: " +(d.data.Rank) + "<br> Revenue: " +(d.data.Revenue) 
+                }
                 tooltip
                   .style("left", d3.event.pageX + 20 + "px")
                   .style("top", d3.event.pageY - 20 + "px")
                   .style("display", "inline-block")
-                  .html((d.data.name) + "<br>" + (d.value));
+                  .html(info);
               })
             .on("mouseout", function(d){ tooltip.style("display", "none");});;
         return bar;

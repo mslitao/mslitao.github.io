@@ -13,7 +13,7 @@ function drawchart_hierarchical_bar(chart_id ){
     .scale(x);
 
     levelInfo = ["Break Down By Country", "Break Down by Sector", "Ranking"];
-    indicatorInfo = ["Ranking of Company Count", "Ranking of Company Count", "Ranking of Company Revenue"];
+    indicatorInfo = ["Country Ranking with the most Companies", "Sector Ranking with the most Companies", "Company Ranking by Revenue"];
     var tooltipInfo = d3.select(chart_id).append("div").attr("class", "toolTip").attr("id", "toolTipInfo");
     tooltipInfo.style("right",  "10px").style("bottom", "10px")
     breakbyCountry = ""

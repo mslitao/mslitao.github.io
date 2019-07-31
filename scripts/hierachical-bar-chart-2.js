@@ -41,12 +41,12 @@ function drawchart_hierarchical_bar(chart_id ){
         .attr("y1", "100%");
     d3.json("Fortune-Global-2019.json", function(error, root) {
         if (error) throw error;
+        console.log(root)
         root = d3.hierarchy(root)
-                .avg(d => d.data.value)
-                .sort((a,b) => b.value - a.value);
+                .sort((a,b) => b.data.value - a.data.value);
         partition(root);
         console.log(root)
-        x.domain([0, root.value]).nice();
+        x.domain([0, 150]).nice();
         down(root, 0);
     });
 
@@ -95,7 +95,7 @@ function drawchart_hierarchical_bar(chart_id ){
         enter.select("rect").style("fill", color(true));
         
         // Update the x-scale domain.
-        x.domain([0, d3.max(d.children, function(d) { return d.value; })]).nice();
+        x.domain([0, d3.max(d.children, function(d) { return d.data.value; })]).nice();
         
         // Update the x-axis.
         svg.selectAll(".x.axis").transition()
@@ -113,7 +113,7 @@ function drawchart_hierarchical_bar(chart_id ){
             .style("fill-opacity", 1);
         // Transition entering rects to the new x-scale.
         enterTransition.select("rect")
-            .attr("width", function(d) { return x(d.value); })
+            .attr("width", function(d) { return x(d.data.value); })
             .style("fill", function(d) { return color(!!d.children); });
         
         // Transition exiting bars to fade out.
@@ -124,7 +124,7 @@ function drawchart_hierarchical_bar(chart_id ){
         
         // Transition exiting bars to the new x-scale.
         exitTransition.selectAll("rect")
-            .attr("width", function(d) { return x(d.value); });
+            .attr("width", function(d) { return x(d.data.value); });
         
         // Rebind the current node to the background.
         svg.select(".background")
@@ -172,7 +172,7 @@ function drawchart_hierarchical_bar(chart_id ){
             .filter(function(p) { return p === d; })
             .style("fill-opacity", 1e-6);
         // Update the x-scale domain.
-        x.domain([0, d3.max(d.parent.children, function(d) { return d.value; })]).nice();
+        x.domain([0, d3.max(d.parent.children, function(d) { return d.data.value; })]).nice();
         // Update the x-axis.
         svg.selectAll(".x.axis").transition()
             .duration(duration)
@@ -185,7 +185,7 @@ function drawchart_hierarchical_bar(chart_id ){
         // When the entering parent rect is done, make it visible!
         enterTransition.select("rect")
             .attr("width", function(d) {
-                 return x(d.value);
+                 return x(d.data.value);
             })
             .on("end",function(p) { if (p === d) d3.select(this).style("fill-opacity", null); });
         // Transition exiting bars to the parent's position.
@@ -198,7 +198,7 @@ function drawchart_hierarchical_bar(chart_id ){
             .style("fill-opacity", 1e-6);
         // Transition exiting rects to the new scale and fade to parent color.
         exitTransition.select("rect")
-            .attr("width", function(d) { return x(d.value); })
+            .attr("width", function(d) { return x(d.data.value); })
             .style("fill", color(true));
         // Remove exiting nodes when the last child has finished transitioning.
         exit.transition()
@@ -230,7 +230,7 @@ function drawchart_hierarchical_bar(chart_id ){
             .text(function(d) { return d.data.name; });
         bar.append("rect")
             .attr("width", function(d) { 
-                return x(d.value); 
+                return x(d.data.value); 
             })
             .attr("height", barHeight)
             .on("mousemove", function(d){
@@ -257,7 +257,7 @@ function drawchart_hierarchical_bar(chart_id ){
         var x0 = 0;
         return function(d) {
             var tx = "translate(" + x0 + "," + barHeight * i * 1.2 + ")";
-            x0 += x(d.value);
+            x0 += x(d.data.value);
             return tx;
         };
     }

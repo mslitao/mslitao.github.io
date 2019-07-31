@@ -3,18 +3,18 @@ var treeData1 =
       "name": "Root: Country",
       "children": [
         {
-          "name": "Median: Sector A",
+          "name": "Node: Sector A",
           "children": [
             {
-              "name": "Node: Company A"
+              "name": "Leaf: Company A"
             },
             {
-              "name": "Node: Company B"
+              "name": "Leaf: Company B"
             }
           ]
         },
         {
-          "name": "Median: Sector B"
+          "name": "Node: Sector B"
         }
       ]
     };

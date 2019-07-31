@@ -87,9 +87,8 @@
             <span class="ml1 nowrap" title="7/25/2019"><span class="light-gray"></span> July 25, 2019</span>
         </div>
 
-        <div class="flex">Narrative Visualization
+        <div class="flex">Narrative Visualization - Fortune Global 500 (in 2018)
         </div>
-
         <div class="flex">By
             <span class="mid-gray">
           <a class="inline-flex items-center fw5 no-underline near-black hover-blue" href="https://www.linkedin.com/in/-tao-li">Tao Li
@@ -98,9 +97,13 @@
 
         <hr>
 
-        <h1>Storytelling using Narrative Visualization</h1>
+        <h1>Hierarchical Visualization of Fortune Global 500 @2019</h1>
         <hr>
-        <h3>Hierachical Bar Chart</h3>
+        <p>The Fortune Global 500, also known as Global 500, is an annual ranking of the top 500 corporations worldwide as measured by revenue and the list is compiled and published annually by Fortune magazine.</p>
+        <p>The world’s 500 largest companies generated $32.7 trillion in revenues and $2.15 trillion in profits in 2019. Together, this year’s Fortune Global 500 companies employ 69.3 million people worldwide and are represented by 34 countries</p>
+        
+        <h3>Hierachical Visualization using D3</h3>
+        <p>A Tree Diagram is a way of visually representing hierarchy in a tree-like structure. Typically the structure of a Tree Diagram consists of elements such as a root node, a member that has no superior/parent. Then there are the nodes, which are linked together with line connections called branches that represent the relationships and connections between the members. Finally, the leaf nodes (or end-nodes) are members who have no children or child nodes.</p>
         <div id = "div_intro">
           <div class="row container">
             <div class="col-5">
@@ -126,13 +129,13 @@
                             <td>Companies Count, Total Revenue</td>
                           </tr>
                           <tr>
-                            <th scope="row">Median</th>
+                            <th scope="row">Node</th>
                             <td>Sector</td>
                             <td>Financials, Retailing, Energy</td>
                             <td>Companies Count, Total Revenue</td>
                           </tr>
                           <tr>
-                            <th scope="row">Node</th>
+                            <th scope="row">Leaf</th>
                             <td>Company</td>
                             <td>Walmart, Apple, Microsoft</td>
                             <td>Company Revenue, World Ranking</td>
@@ -142,7 +145,12 @@
                 </div>
             </div>
           </div>
-          
+          <p>In this Visualization, we are starting with Root Node of Country to visualize company count ranking per Country to analyze top Countries with the most Global 500 companies.</p>
+
+          <p>We then enabled drill down scene to allow user click interested country to visualize top Sectors with the most Global 500 companies.</p>
+
+          <p>In the leaf nodes, we are ranking companies by revenue break down by interested Country and Sector. </p>
+
         </div>
         <hr>
         <div class="alert alert-info" role="alert">
@@ -150,6 +158,24 @@
           </div>
         <div id = "chart_hbar" class="card">
             
+        </div>
+        <div class="alert alert-secondary" style ="display:none" id="Insight1" role="alert">
+            <h3>Top Countries with the most Global 500 companies.</h3>
+            <p>Overall, the top 10 countries with the most Global 500 companies are the US (126), China (120), Japan (52), Germany (32), France (28), UK (21), South Korea (16), Netherlands (15), Switzerland (14) and Canada (12). Together these countries host 87.2% of the ranking.</p>
+            
+            <p>Did you find your interested Country in the list? You can click the bar to drill down to any interested Country to discover more ranking and details.</p>
+        </div>
+        <div class="alert alert-secondary" id="Insight2" role="alert">
+            <h3>Top Sectors with most Global 500 companies for specified Country.</h3>
+            <p>Drilling down to your interested Country, you can have better understanding on top companies distributions across different sectors.</p>
+            <p>You can further drill down to any interested sector under this Country to get the company details.</p>
+            <p>Or, please navigate back to the ranking page break down by Country for a overview.</p>
+        </div>
+        <div class="alert alert-secondary" id="Insight3" role="alert">
+            <h3>Company Ranking break down by Country and Sector</h3>
+            <p>Now, drilling down to specified Country and Sector, you can clearly get the TOP companies ranking by revenue. </p>
+            <p>You can hover the button on your interested company to discover more detais. </p>
+            <p>Now, you can navigate back to have discover some high level break down ranking by Sector and Country.</p>
         </div>
         <!--h3>Bubble Chart </h3>
         <div id = "chart_bubble" class="card">

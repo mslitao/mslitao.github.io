@@ -59,8 +59,18 @@ function drawchart_hierarchical_bar(chart_id ){
         }
         if(level == 3) breakBySector = "<br/>Break by Sector: " + d.data.name
 
+
         tooltipInfo.html(indicatorInfo[level - 1]+ breakbyCountry + breakBySector)
         .style("display", "inline-block");
+
+        for(var idx =1; idx <=3; idx++){
+            if(idx == level){
+                d3.select("#Insight"+ idx).style("display", "inline-block");
+            }
+            else{
+                d3.select("#Insight"+ idx).style("display", "none");
+            }
+        }
 
         var end = duration + d.children.length * delay;
         // Mark any currently-displayed bars as exiting.
@@ -134,6 +144,15 @@ function drawchart_hierarchical_bar(chart_id ){
 
         tooltipInfo.html(indicatorInfo[level - 1]+ breakbyCountry + breakBySector)
         .style("display", "inline-block");
+
+        for(var idx =1; idx <=3; idx++){
+            if(idx == level){
+                d3.select("#Insight"+ idx).style("display", "inline-block");
+            }
+            else{
+                d3.select("#Insight"+ idx).style("display", "none");
+            }
+        }
 
         var end = duration + d.children.length * delay;
         // Mark any currently-displayed bars as exiting.

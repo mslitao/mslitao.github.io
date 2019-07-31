@@ -103,29 +103,48 @@
         <h3>Hierachical Bar Chart</h3>
         <div id = "div_intro">
           <div class="row container">
-            <div class="col ">
+            <div class="col-5">
                 <div  class="card" id = "chart_tree_1">
-                    Hierachy 1
                 </div>
             </div>
-            <div class="col">
+            <div class="col-7">
                 <div  class="card" id = "chart_tree_2">
-                    Hierachy 2
+                    <table class="table  table-sm">
+                        <thead>
+                          <tr>
+                            <th scope="col">Level</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Example</th>
+                            <th scope="col">Indicators</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Root</th>
+                            <td>Country</td>
+                            <td>U.S., China, Japan</td>
+                            <td>Companies Count, Total Revenue</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Median</th>
+                            <td>Sector</td>
+                            <td>Financials, Retailing, Energy</td>
+                            <td>Companies Count, Total Revenue</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Node</th>
+                            <td>Company</td>
+                            <td>Walmart, Apple, Microsoft</td>
+                            <td>Company Revenue, World Ranking</td>
+                          </tr>
+                        </tbody>
+                      </table>
                 </div>
             </div>
           </div>
           
         </div>
         <hr>
-        <div class="dropdown dropdown-menu-right" style="position:relative;">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Hierachy Structure
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button">1</button>
-              <button class="dropdown-item" type="button">2</button>
-            </div>
-          </div>
         <div class="alert alert-info" role="alert">
             <p class="mb-0">Click a green bar to drill down, or click the background to go back up.</p>
           </div>

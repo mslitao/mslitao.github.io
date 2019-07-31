@@ -1,18 +1,23 @@
-
-
 function drawchart_hierarchical_bar(chart_id ){
-    var margin = {top: 30, right: 120, bottom: 0, left: 120},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    var level = 0
+    var margin = {top: 30, right: 50, bottom: 10, left: 250},
+    width = 1100 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
     var x = d3.scaleLinear().range([0, width]);
     var barHeight = 25;
-    var color = d3.scaleOrdinal().range(["#008000", "#808080"]);
+    var color = d3.scaleOrdinal().range(["#008000", "#6495ED"]);
     var duration = 750,
     delay = 25;
     var partition = d3.partition();
     var xAxis = d3.axisTop()
     .scale(x);
 
+    levelInfo = ["Break Down By Country", "Break Down by Sector", "Ranking"];
+    indicatorInfo = ["Ranking of Company Count", "Ranking of Company Count", "Ranking of Company Revenue"];
+    var tooltipInfo = d3.select(chart_id).append("div").attr("class", "toolTip").attr("id", "toolTipInfo");
+    tooltipInfo.style("right",  "10px").style("bottom", "10px")
+    breakbyCountry = ""
+    breakBySector = ""
     var svg = d3.select(chart_id).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -31,20 +36,32 @@ function drawchart_hierarchical_bar(chart_id ){
         .attr("class", "y axis")
         .append("line")
         .attr("y1", "100%");
-    d3.json("testdata.json", function(error, root) {
+    d3.json("Fortune-Global-2019.json", function(error, root) {
         if (error) throw error;
         root = d3.hierarchy(root)
                 .sum(d => d.size)
                 .sort((a,b) => b.value - a.value);
         partition(root);
-
+        console.log(root)
         x.domain([0, root.value]).nice();
         down(root, 0);
     });
 
-
     function down(d, i) {
         if (!d.children || this.__transition__) return;
+
+        level = level + 1
+        console.log(d)
+        if(level == 1) breakbyCountry = ""
+        if(level == 2) {
+            breakbyCountry = "<hr/>Break by Country: " + d.data.name
+            breakBySector = ""
+        }
+        if(level == 3) breakBySector = "<br/>Break by Sector: " + d.data.name
+
+        tooltipInfo.html(indicatorInfo[level - 1]+ breakbyCountry + breakBySector)
+        .style("display", "inline-block");
+
         var end = duration + d.children.length * delay;
         // Mark any currently-displayed bars as exiting.
         var exit = svg.selectAll(".enter")
@@ -108,6 +125,16 @@ function drawchart_hierarchical_bar(chart_id ){
 
     function up(d) {
         if (!d.parent || this.__transition__) return;
+
+        level = level - 1
+        if(level == 1) breakbyCountry = ""
+        if(level == 2) {
+            breakBySector = ""
+        }
+
+        tooltipInfo.html(indicatorInfo[level - 1]+ breakbyCountry + breakBySector)
+        .style("display", "inline-block");
+
         var end = duration + d.children.length * delay;
         // Mark any currently-displayed bars as exiting.
         var exit = svg.selectAll(".enter")

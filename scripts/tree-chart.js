@@ -1,20 +1,20 @@
 var treeData1 = 
     {
-      "name": "Level 1: Country",
+      "name": "Root: Country",
       "children": [
         {
-          "name": "Level 2: Industry A",
+          "name": "Median: Sector A",
           "children": [
             {
-              "name": "Level 3: Company A"
+              "name": "Node: Company A"
             },
             {
-              "name": "Level 3: Company B"
+              "name": "Node: Company B"
             }
           ]
         },
         {
-          "name": "Level 2: Industry B"
+          "name": "Median: Sector B"
         }
       ]
     };
@@ -42,13 +42,13 @@ var treeData2 =
 
 function drawchart_tree(chart_id ){
     drawchart_tree_core(chart_id + "_1", treeData1);
-    drawchart_tree_core(chart_id + "_2", treeData2);
+    //drawchart_tree_core(chart_id + "_2", treeData2);
 }
 
 function drawchart_tree_core(chart_id, treeData){
         // set the dimensions and margins of the diagram
-    var margin = {top: 20, right: 20, bottom: 60, left: 30},
-    width = 500 - margin.left - margin.right,
+    var margin = {top: 20, right: 5, bottom: 70, left: 5},
+    width = 400 - margin.left - margin.right,
     height = 200 - margin.top - margin.bottom;
 
     // declares a tree layout and assigns the size

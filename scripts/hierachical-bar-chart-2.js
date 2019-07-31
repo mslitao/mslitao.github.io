@@ -1,8 +1,8 @@
 function drawchart_hierarchical_bar(chart_id ){
     var level = 0
-    var margin = {top: 30, right: 50, bottom: 10, left: 250},
+    var margin = {top: 30, right: 50, bottom: 20, left: 250},
     width = 1100 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 550 - margin.top - margin.bottom;
     var x = d3.scaleLinear().range([0, width]);
     var barHeight = 25;
     var color = d3.scaleOrdinal().range(["#008000", "#6495ED"]);
@@ -12,12 +12,14 @@ function drawchart_hierarchical_bar(chart_id ){
     var xAxis = d3.axisTop()
     .scale(x);
 
-    levelInfo = ["Break Down By Country", "Break Down by Sector", "Ranking"];
     indicatorInfo = ["Country Ranking with the most Companies", "Sector Ranking with the most Companies", "Company Ranking by Revenue"];
     var tooltipInfo = d3.select(chart_id).append("div").attr("class", "toolTip").attr("id", "toolTipInfo");
     tooltipInfo.style("right",  "10px").style("bottom", "10px")
     breakbyCountry = ""
     breakBySector = ""
+
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
     var svg = d3.select(chart_id).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -28,7 +30,8 @@ function drawchart_hierarchical_bar(chart_id ){
         .attr("class", "background")
         .attr("width", width)
         .attr("height", height)
-        .on("click", up);
+        .on("click", up)
+        ;
 
     svg.append("g")
         .attr("class", "x axis");
@@ -225,7 +228,15 @@ function drawchart_hierarchical_bar(chart_id ){
             .text(function(d) { return d.data.name; });
         bar.append("rect")
             .attr("width", function(d) { return x(d.value); })
-            .attr("height", barHeight);
+            .attr("height", barHeight)
+            .on("mousemove", function(d){
+                tooltip
+                  .style("left", d3.event.pageX + 20 + "px")
+                  .style("top", d3.event.pageY - 20 + "px")
+                  .style("display", "inline-block")
+                  .html((d.data.name) + "<br>" + (d.value));
+              })
+            .on("mouseout", function(d){ tooltip.style("display", "none");});;
         return bar;
     }
 
